@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>道具づくり スターターパック</title>
+<style>
+:root{--bg:#f6f8fb;--card:#fff;--text:#1e2430;--sub:#58606e;--line:#d5dce6;--main:#1f3a5f;--accent:#f28c28;--ok:#1b7a3d;--code:#f1f4f8}
+@media (prefers-color-scheme: dark){:root{--bg:#12161d;--card:#1b212b;--text:#e8ecf2;--sub:#a3acba;--line:#323b49;--main:#8db4e8;--accent:#f5a04d;--ok:#6cd391;--code:#232b37}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.8 -apple-system,"Hiragino Sans","Noto Sans JP",sans-serif}
+[hidden]{display:none!important}
+header{background:var(--main);color:#fff;padding:28px 16px}
+@media (prefers-color-scheme: dark){header{background:#243249;color:#fff}}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+header .wrap{padding:0}
+h1{margin:0 0 6px;font-size:1.6rem;line-height:1.4}
+header p{margin:0;opacity:.9}
+nav{position:sticky;top:0;z-index:5;background:var(--card);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:6px;overflow-x:auto;padding:8px 16px}
+nav a{white-space:nowrap;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--text);text-decoration:none;font-size:.92rem}
+section{padding:28px 0 8px}
+h2{font-size:1.35rem;border-left:6px solid var(--accent);padding-left:10px;margin:0 0 10px;line-height:1.4}
+.note{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:12px 0;color:var(--sub);font-size:.95rem}
+.note strong{color:var(--text)}
+.steps{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 16px 10px 36px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:14px 0}
+.card h3{margin:0 0 6px;font-size:1.08rem;line-height:1.5}
+.num{display:inline-block;min-width:1.9em;text-align:center;background:var(--main);color:#fff;border-radius:6px;margin-right:6px;font-size:.9rem}
+@media (prefers-color-scheme: dark){.num{background:#3b5a86}}
+.tag{display:inline-block;font-size:.78rem;border-radius:999px;padding:0 9px;margin-right:6px;border:1px solid var(--line);color:var(--sub);vertical-align:1px}
+.t-作る{border-color:#2f7bd0;color:#2f7bd0}.t-売る{border-color:#d27b1c;color:#d27b1c}.t-守る{border-color:#1b7a3d;color:#1b7a3d}.t-続ける{border-color:#8a4fc4;color:#8a4fc4}
+.use{margin:4px 0 8px;color:var(--sub);font-size:.95rem}
+pre.prompt{background:var(--code);border:1px solid var(--line);border-radius:8px;padding:12px;margin:8px 0;white-space:pre-wrap;word-break:break-word;font:14px/1.7 ui-monospace,"SF Mono","Hiragino Sans",monospace;max-height:420px;overflow:auto}
+button.copy,a.dl{display:inline-block;font:inherit;font-size:.95rem;padding:9px 16px;border-radius:8px;border:0;background:var(--main);color:#fff;cursor:pointer;text-decoration:none;margin:4px 8px 4px 0}
+@media (prefers-color-scheme: dark){button.copy,a.dl{background:#3b5a86}}
+a.dl{background:var(--ok);color:#fff}
+button.copy.done{background:var(--ok)}
+.lab{font-weight:700;margin:10px 0 2px;font-size:.92rem}
+.card ul{margin:2px 0 6px;padding-left:1.3em;font-size:.95rem}
+.card p{margin:2px 0}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.filters button{font:inherit;font-size:.92rem;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--main);color:#fff;border-color:var(--main)}
+@media (prefers-color-scheme: dark){.filters button[aria-pressed="true"]{background:#3b5a86;border-color:#3b5a86}}
+details summary{cursor:pointer;color:var(--main);margin:6px 0}
+.ng li{margin:6px 0}
+footer{padding:28px 0 60px;color:var(--sub);font-size:.9rem}
+.std{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text)}
+@media (max-width:480px){h1{font-size:1.35rem}pre.prompt{font-size:13px}}
+
+h3.cg{font-size:1.05rem;margin:1.4em 0 .4em;color:#1a5d8c}
+ul.chk{list-style:none;padding:0;margin:0 0 .8em}
+ul.chk li{padding:.45em .2em;border-bottom:1px solid #dde3e8}
+ul.chk label{display:flex;gap:.6em;align-items:flex-start;cursor:pointer}
+ul.chk input{margin-top:.35em;width:1.1em;height:1.1em;flex:none}
+@media print{header,nav,.btns,.filters,button.copy{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>道具づくり スターターパック</h1>
+<p>『リフォーム営業13年の私が、Claude Codeで作った道具』読者特典（2026年11月27日版）</p>
+</div></header>
+<nav><div class="wrap"><a href="#p1">① お願い文集</a><a href="#tp">② CLAUDE.mdひな形</a><a href="#ck1">③ 会社の情報を使わずに作る</a><a href="#ck2">④ 完成の確認</a><a href="#ws">おまけ ワークシート</a></div></nav>
+<main class="wrap">
+
+<section id="top">
+<div class="note"><strong>はじめに読んでください。</strong>
+このページには、本のつづきとして使える4つの道具と、おまけのワークシートが入っています。使うときは、大事なファイルのない<strong>練習用の新しいフォルダ</strong>で始めてください。作る道具は、<strong>自宅の私物の環境で、ダミーのデータだけ</strong>で作ります。お客様の情報・会社の資料・会社のロゴは入れません。</div>
+<div class="note">補助金・法律・金利などの数字は、お願い文の中では<strong>仮のもの</strong>です。使う前に、必ず公式ページで最新を確かめてください。法律・税金・補助金の申請の話は一般的な情報で、あなたの場合どうなるかは、各窓口や専門家にご確認ください。これらを使っても、仕事の成果や収入が得られるとは限りません。職場のパソコンで使えるかは、<strong>職場の規則</strong>に従ってください。</div>
+</section>
+
+<section id="p1s">
+<h2>① 道具づくりのお願い文集（12本）</h2>
+<ol class="steps">
+<li>練習用の新しいフォルダで、Claude Codeを開きます。</li>
+<li>使いたいお願い文の「お願い文をコピー」を押します。</li>
+<li>【　】のところを、自分の言葉に書きかえます（【】の記号も消します）。</li>
+<li>貼って送ります。「実行していいですか？」と出たら、<strong>内容を読んでから</strong>許可します。</li>
+<li>できあがったら、「確認するところ」を自分の目で確かめます。同じお願い文でも、できあがりは毎回少しずつ違います。</li>
+</ol>
+<div class="filters" role="group" aria-label="場面でしぼりこむ"><button type="button" data-filter="all" aria-pressed="true">すべて（12）</button><button type="button" data-filter="作る" aria-pressed="false">作る（7）</button><button type="button" data-filter="守る" aria-pressed="false">守る（1）</button><button type="button" data-filter="確かめる" aria-pressed="false">確かめる（4）</button></div>
+<div id="cards">
+<article class="card" data-scene="作る" id="p1"><h3><span class="num">1</span><span class="tag t-作る">作る</span>窓の断熱リフォームの簡易シミュレーター</h3><p class="use">本書第2章。窓の数と種類を入れると、工事費の目安と補助額の目安が出る画面を作るとき。</p><pre class="prompt" id="pr1">戸建て住宅向けの、窓の断熱リフォームの簡易シミュレーターを、HTML1ファイルで作ってください。会社名・連絡先・単価はぜんぶ架空のサンプルにします（会社名は「ひだまり工務店（サンプル）」）。
+・入力: 工事の種類（内窓／ガラス交換／窓ごと交換）、性能の区分、窓の大きさ、数。窓は何か所でも足せる。
+・出力: 工事費の目安（幅つき）、補助額の目安、補助を使った場合の実質負担。
+・補助額は【補助事業の名前】の公式の金額表から計算する。金額表は別の表にまとめて、あとから差し替えられるようにする。画面に「公式の手引きの版」と「確認した日」を表示する。
+・申請の期限と予算の状況は、画面の上に目立つように表示し、「公式サイトで最新を確認」と書く。
+・「概算です」と画面に書く。インターネットなしで動くようにする。
+・できたら、窓1か所の場合の計算を、式つきで見せてください。</pre><button class="copy" type="button" data-target="pr1">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>窓1か所の場合を、電卓で計算し直す。画面の工事費・補助額・実質負担と合うか。</li><li>補助額の表を、公式の金額表と1マスずつ見比べる（全部のマス）。</li><li>数の欄に、0・空欄・マイナスを入れて、表示が壊れないか。</li><li>期限や予算の表示が、今日の時点で古くなっていないか。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>「補助金も出るようにして」だけだと、金額を記憶で入れてしまい、公式の表とずれます。出どころ（公式の表）を指定します。</p></article>
+<article class="card" data-scene="作る" id="p2"><h3><span class="num">2</span><span class="tag t-作る">作る</span>A4の提案資料（片面1枚）</h3><p class="use">本書第2章。お客様に渡す、片面1枚の資料を作るとき。</p><pre class="prompt" id="pr2">窓の断熱リフォームの、お客様向けのA4提案資料（片面1枚）を、HTMLで作ってください。会社名は「ひだまり工務店（サンプル）」、連絡先はダミーにします。
+・載せるもの: 見出し、補助額の早見表、費用の例（工事費の目安／補助額の目安／実質負担）、ご相談から工事までの流れ、期限、問い合わせ先。
+・補助額と期限は【補助事業の名前】の公式の手引きから。「出典と確認日」を小さく入れる。
+・費用の例は、表示の桁をそろえて、お客様が引き算して合うようにする（丸めたせいで合わなくならないように）。
+・A4縦1枚に収める。印刷しても文字が切れないようにする。
+・できたら、PDFにしたときのページ数を見せてください。</pre><button class="copy" type="button" data-target="pr2">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>PDFにして、本当に1枚か。2枚目にはみ出していないか。</li><li>費用の例の数字を、お客様の目で引き算してみる。合うか。</li><li>「出典と確認日」が入っているか。期限が古くなっていないか。</li><li>会社名・連絡先が、架空のままか（本物を入れていないか）。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>「いい感じの提案資料を」だと、言い切りが強い文（必ず安くなる、など）が入りやすくなります。「概算」「目安」と書かせます。</p></article>
+<article class="card" data-scene="作る" id="p3"><h3><span class="num">3</span><span class="tag t-作る">作る</span>現場の点検報告書（iPadで写真を撮って並べる）</h3><p class="use">本書第3章。現場で写真を撮りながら、A4の報告書を作る画面がほしいとき。</p><pre class="prompt" id="pr3">点検報告書を作る画面を、HTML1ファイルで作ってください。iPadのブラウザで使います。お客様名・会社名・日付はぜんぶ空欄か、ダミーにします。
+・上に「お客様名・点検日・所在地・点検担当」を入れる欄。入れると、下の報告書の該当欄に入る。
+・報告書は、見出し（例: 基礎）ごとに「写真の枠」と「診断項目・診断結果・所見」の欄を並べる。診断欄は、あとから足せる・消せる。
+・写真は、タップしてカメラで撮る、またはライブラリから選ぶ。
+・診断結果と所見は、定型文を選んで入れられる（あとから書き換えられる）。
+・A4で1枚ずつ、自動で区切る。PDFにして保存できる。
+・入力した内容は、ブラウザに自動で保存して、開き直したら「前回の続き」を出す。
+・iPadでボタンが押せるか、確かめてください。確かめられないときは、そう書いてください。</pre><button class="copy" type="button" data-target="pr3">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>iPadで、ボタンを実際に押す。パソコンで動いただけで「できた」にしない。</li><li>写真を何枚か入れて、PDFにする。写真が切れたり、ページがずれたりしないか。</li><li>「保存がない状態（初めて開く）」と「保存がある状態（前回の続き）」の両方で、開いた直後の画面を見る。</li><li>お客様名などが、前の入力のまま残っていないか。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>「点検報告書を作って」だけだと、実在のメーカーの様式に似せようとしたり、ロゴや会社名を入れたりしやすくなります。ダミーで作る、と書きます。</p></article>
+<article class="card" data-scene="作る" id="p4"><h3><span class="num">4</span><span class="tag t-作る">作る</span>写真を1つのファイルにまとめる（写真パック）</h3><p class="use">本書第3章。現場の端末から、事務所のパソコンへ写真を運びたいとき（メールの添付しか使えない場合など）。</p><pre class="prompt" id="pr4">iPadで選んだ写真を、1つのHTMLファイルにまとめる画面を、HTML1ファイルで作ってください。
+・写真を複数選ぶと、縮小して1つのファイルに入れる（1枚あたりの大きさの上限を決める）。
+・できたファイルは、メールに添付できる大きさにする。上限を超えそうなら、画面に警告する。
+・受け取った側が、ブラウザで開くだけで、写真が一覧で見える。
+・写真のデータは、画面を閉じたら端末に残らないようにする（残すときは、残す場所と消し方を画面に書く）。
+・写真はダミー（自分で撮った無関係な写真）で試します。</pre><button class="copy" type="button" data-target="pr4">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>できたファイルの大きさを見る。メールで送れる大きさか。</li><li>別のパソコンで開いて、写真が全部見えるか。</li><li>写真の向き（縦横）が合っているか。</li><li>試した写真に、人や表札、お客様の家が写っていないか。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>「写真をまとめて」だけだと、元の大きさのまま入れてしまい、ファイルが重くなります。大きさの上限を決めて頼みます。</p></article>
+<article class="card" data-scene="作る" id="p5"><h3><span class="num">5</span><span class="tag t-作る">作る</span>間取りの簡易プランナー（平面図とビフォーアフター）</h3><p class="use">本書第4章。お客様に「どう変わるか」を見せる平面図を、自分で描けるようにしたいとき。</p><pre class="prompt" id="pr5">間取りの簡易プランナーを、HTML1ファイルで作ってください。間取りはぜんぶ架空のテンプレート（2LDK）にします。
+・部屋の大きさ（mm）と名前を入れると、平面図が描かれる。部屋の名前の下に帖数とm2を出す。
+・壁、ドア、窓、家具を置ける。
+・「いまの間取りを現状として記録」ボタン。そのあとに壁を消すと、「現状」と「ご提案」を左右に並べた画像が作れて、消した壁が赤く「撤去」と出る。
+・寸法は、画面で計算して出す。手で打たせない。
+・保存した間取りは、あとから開ける。開く前に「前回の続き／新しく始める」を聞く。
+・できたら、壁を1本消したビフォーアフター画像を見せてください。</pre><button class="copy" type="button" data-target="pr5">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>部屋の大きさを手で計算して、帖数と合うか（1帖の広さの決め方も画面に書いてあるか）。</li><li>壁を消したあと、どこからも入れない部屋ができていないか。</li><li>ビフォーアフター画像で、消した壁が赤い印のところと一致しているか。</li><li>「新しく始める」を選んだとき、前の間取りが残っていないか。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>「間取りを描くツール」だけだと、寸法や面積を文章で適当に出してしまいます。計算で出す、と書きます。</p></article>
+<article class="card" data-scene="作る" id="p6"><h3><span class="num">6</span><span class="tag t-作る">作る</span>補助金かんたん検索（公式ページの要約カード）</h3><p class="use">本書第5章。地域と工事の種類で、使えそうな補助金を一覧にしたいとき。</p><pre class="prompt" id="pr6">リフォームの補助金を探す画面を、HTML1ファイルで作ってください。
+・制度は、私が貼る公式ページの内容だけから作る。書いていないことは、書かずに「公式ページで確認」と出す。推測で埋めない。
+・カードに出すもの: 制度の名前、対象、補助額・上限、受付期間、公式ページへのリンク、確認した日。
+・地域（市区町村）と工事の種類のボタンで絞り込める。
+・期限が近い順の一覧と、予算の使用状況（%）の欄をつける（数字は私が貼ったものだけ。取得した日時も出す）。
+・「併用できる・できない」は、公式ページに書いてあるものだけを出し、書いていない組み合わせは「公式に記載なし」と出す。
+・まず、次の3制度で作ってください: 【制度A】【制度B】【制度C】（公式ページの文を貼ります）</pre><button class="copy" type="button" data-target="pr6">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>カードの内容を、公式ページと見比べる（申込期間、補助額の下限にかかる条件、対象の書き方）。「〇〇の場合に限る」が落ちていないか。</li><li>公式ページに書いていないことが、カードに入っていないか。</li><li>期限・予算の数字に「取得した日時」が付いているか。</li><li>リンクを全部押して、開くか。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>「補助金を調べて一覧にして」だと、AIが記憶やそれらしい推測で埋めます。貼った文だけから作る、と書きます。</p></article>
+<article class="card" data-scene="作る" id="p7"><h3><span class="num">7</span><span class="tag t-作る">作る</span>お支払いシミュレーション（月々の目安）</h3><p class="use">本書第6章。工事項目を選ぶと、月々のお支払いの目安が出る画面がほしいとき。</p><pre class="prompt" id="pr7">リフォームのお支払いシミュレーションを、HTML1ファイルで作ってください。会社名・お客様名・担当者名はぜんぶ架空のダミーにします。
+・工事項目をチェックで選ぶ（数量と単価は書きかえられる）。「自由に項目を足す」ボタンもつける。
+・合計に、諸経費（初期値5%）と消費税（10%）を足して、借入元金にする。
+・返済は、元利均等（通常ローン）。実質年率（初期値は仮の数字。画面で打ち替えられる）と、回数（60・120・180回）を選べる。
+・出すもの: 毎月のお支払い、最終回のみの金額、分割払手数料、お支払い総額、回数ごとの比較。
+・画面に「概算です。金融機関の審査・条件で変わります」と書く。
+・できたら、1つの条件の計算を、式つきで見せてください。</pre><button class="copy" type="button" data-target="pr7">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>1つの条件を、電卓で計算し直す。毎月のお支払いと総額が合うか。</li><li>金利を0%にしたとき、割り算になって、表示が壊れないか。</li><li>「概算です」の注記が、印刷した提案書にも入っているか。</li><li>金利・期間の数字が、仮のまま本物として見えていないか。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>ローンの計算は、見た目がそれらしくても式がずれていることがあります。1件を手で計算し直す、を必ずつけます。</p></article>
+<article class="card" data-scene="守る" id="p8"><h3><span class="num">8</span><span class="tag t-守る">守る</span>ダミーのデータを作ってもらう</h3><p class="use">どの道具でも。お客様の情報や会社の資料を使わずに、動作確認用のデータを作りたいとき。</p><pre class="prompt" id="pr8">この道具を試すための、ダミーのデータを作ってください。
+・名前は、ありふれた下の名前だけ（例: みお）か「サンプル様」の形にする。住所・電話番号・メールアドレス・金額は、ぜんぶ架空にする。
+・会社名は「ひだまり工務店（サンプル）」を使い、実在の会社名・ロゴ・商品名は使わない。
+・数字は、手で計算しやすいきりのいい数字にする。
+・データの目立つところに「サンプルです（架空）」と書く。
+・作ったデータの一覧を、最後に見せてください。</pre><button class="copy" type="button" data-target="pr8">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>実在の名前・会社・住所・電話番号が入っていないか。</li><li>うっかり、手元のファイル（本物の資料）を読んで作っていないか。「どのファイルを読みましたか」と聞いて確かめる。</li><li>「サンプルです」の表示が、画面と印刷の両方に出るか。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>「それらしいデータを」と頼むと、実在の会社名や名前に似たものが出ます。ありふれた名前、架空の会社名、と指定します。</p></article>
+<article class="card" data-scene="確かめる" id="p9"><h3><span class="num">9</span><span class="tag t-確かめる">確かめる</span>公式の数字と突き合わせる</h3><p class="use">補助金・防火・金利など、公式の数字を使う道具ができたとき。</p><pre class="prompt" id="pr9">このツールに入っている【制度・数字の一覧】を、公式ページと1つずつ突き合わせてください。
+・公式ページは、私が貼ったものだけを使う（ほかを探しに行かない）。
+・ツールの記載と公式の記載が違う所を、すべて挙げる（申込期間、金額、条件、対象の書き方、例外の書き方）。
+・条件が短くまとめられて、落ちている所があれば、落ちている文言を示す。
+・違いがなかった項目も、どの文言と見比べたかを書く。
+・公式に書いていない項目は、「公式に記載なし」と書く。</pre><button class="copy" type="button" data-target="pr9">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>指摘された所を、自分でも公式ページで見て、本当に違うか確かめる。</li><li>「違いなし」とされた項目を、数件、自分でも見比べる。</li><li>直したあと、もう一度同じ突き合わせをする。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>「合っているか確認して」だけだと、「確認しました、問題ありません」で終わることがあります。見比べた文言を書かせます。</p></article>
+<article class="card" data-scene="確かめる" id="p10"><h3><span class="num">10</span><span class="tag t-確かめる">確かめる</span>計算の検算テストを作る（回帰テスト）</h3><p class="use">数字を計算する道具ができたとき。ルールや式を直したあとにも、毎回確かめたいとき。</p><pre class="prompt" id="pr10">この道具の計算を、機械で確かめるテストを作ってください。
+・入力を固定にする（毎回同じ数字を入れる）。ダミーの数字だけを使う。
+・期待する答えは、ツールの式を使わずに、別の方法で計算して決める。式と結果を見せる。
+・次のケースを入れる: ふつうの値、0、空欄、いちばん大きい値、端の値（区分の境目）。
+・テストは、ワンコマンド（または1つのボタン）で全部走らせられるようにする。
+・走らせて、通った件数と、通らなかった件数を見せてください。</pre><button class="copy" type="button" data-target="pr10">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>「期待する答え」を、自分の電卓でも1件だけ計算して、合うか。</li><li>わざと式を1か所まちがえて、テストが失敗するか（失敗しないテストは意味がない）。</li><li>あとで式やルールを直したら、必ずこのテストを走らせる。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>できた道具に合わせて答えを決めると、まちがっていても全部通ってしまいます。答えは、別の方法で先に決めます。</p></article>
+<article class="card" data-scene="確かめる" id="p11"><h3><span class="num">11</span><span class="tag t-確かめる">確かめる</span>別の目で見てもらう（ゼロから疑う）</h3><p class="use">道具ができたとき。作った会話とは別の、新しい会話を立てて貼ります。</p><pre class="prompt" id="pr11">次の道具を、初めて見る営業と、初めて見るお客様の目で、ゼロから疑って、おかしい所を全部挙げてください。
+・数字の出どころ、言い切りすぎている文、押せないボタン、紛らわしい表示、古くなりそうな情報を含めて。
+・ほめなくてかまいません。直したほうがよい所だけ。
+・それぞれに「重大／中／軽微」をつけて、理由と、直し方の案を書く。
+・問題がないと判断した項目は、何を見て問題なしとしたかを書く。
+・確認できなかった範囲は、そう書く。
+（ここに、道具のファイルまたは画面の内容を貼る）</pre><button class="copy" type="button" data-target="pr11">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>指摘を、自分の目でも確かめる（AIの指摘がまちがっていることもあります）。</li><li>「重大」から順に直す。直したことを1行ずつ記録する。</li><li>できれば、AIだけでなく、人にも見てもらう。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>作った会話の中で「見直して」と頼むと、自分の作ったものをほめます。必ず新しい会話で、疑う前提で頼みます。</p></article>
+<article class="card" data-scene="確かめる" id="p12"><h3><span class="num">12</span><span class="tag t-確かめる">確かめる</span>どの頼みにも付ける一文</h3><p class="use">すべての頼み文の最後に足します。「確認しました」の中身を、必ず書かせるためです。</p><pre class="prompt" id="pr12">「確認しました」と書くときは、何をどこで見たかを一緒に書いてください。確認できていないことは「未確認」と書いてください。</pre><button class="copy" type="button" data-target="pr12">お願い文をコピー</button><p class="lab">確認するところ</p><ul><li>返事に「何を、どこで、どう見たか」が書いてあるか。書いていなければ、確認していません。</li><li>「未確認」と書いてあるものは、確認できる手段がないか、自分でも考える。</li></ul><p class="lab">こう頼むと失敗しやすい</p><p>この一文を入れても、ゼロにはなりません。それでも、「確認しました」だけの返事は、かなり減ります。</p></article>
+</div>
+</section>
+
+<section id="tp">
+<h2>② CLAUDE.mdひな形（営業・現場の道具づくり用）</h2>
+<div class="note"><strong>CLAUDE.mdは「お願い」で、強制ではありません。</strong>書いてあっても守られないことがあります。大事なものを扱うときは、承認モードのまま（「実行していいですか？」と聞かれる状態のまま）使い、確認が出たら内容を読んでから許可してください。「常に許可」にはしないでください。</div>
+<ol class="steps">
+<li>練習用のフォルダに、ひな形のファイルを置きます。</li>
+<li>ファイル名を「CLAUDE.md」に直します（「道具づくり用_」を消します）。</li>
+<li>【　】のところを、自分の言葉に書きかえます。</li>
+<li>そのフォルダでClaude Codeを開きます。</li>
+</ol>
+<article class="card">
+<h3><span class="tag t-tpl">ひな形</span>営業・現場の道具づくり用</h3>
+<details><summary>中身を見る</summary><pre class="prompt" id="tp1">&lt;!--
+■ このひな形の使い方（この囲みの中は、Claude Codeへのお願いではありません。読んだら消してもかまいません）
+1. 大事なファイルのない、練習用のフォルダに、このファイルを置きます。
+2. ファイル名を「CLAUDE.md」に直します（「道具づくり用_」を消します）。
+3. 【　】のところを、自分の言葉に書きかえます。【】の記号も消します。
+4. そのフォルダでClaude Codeを開きます。
+
+■ 大事な注意
+これは Claude Code への「お願い」で、強制ではありません。書いてあっても、守られないことがあります。
+大事なものをあつかうときは、承認モード（「これを実行していいですか？」と聞かれる状態）のまま使い、
+確認が出たら、内容を読んでから許可してください。「常に許可」にはしないでください。
+このひな形は、自宅の私物の環境で、自分の道具を作る人向けです。職場のパソコンで使えるかは、職場の規則に従ってください。
+--&gt;
+
+# このフォルダでのお願い（営業・現場の道具づくり）
+
+このフォルダは、【フォルダの呼び名（例: 道具づくりの練習場）】です。
+ここでは、【作るもの（例: 窓リフォームの簡易シミュレーター）】を作ります。
+使う人は、【使う人（例: 外回りの営業。iPadで使う）】です。説明は、むずかしい言葉を使わずに書いてください。
+
+## いちばん大事なお願い（安全）
+
+- ファイルやフォルダを**消す・上書きする・移す前に、必ず私に聞いてください**。何を、どこで、なぜ変えるかを先に見せてください。
+- 直すときは、元のファイルを消さずに、新しい名前で保存してください（例:「simulator_v2.html」）。
+- **パスワード・APIキー・個人情報は、書かないし、見ないでください。** そういうファイルがあっても開かずに、私に知らせてください。
+- このフォルダの外のファイルには、触らないでください。
+- 分からないことは、**推測で進めずに聞いてください**。
+
+## 会社の情報・お客様の情報を使わないお願い
+
+- 会社名・ロゴ・商品名・お客様の名前・住所・電話番号・担当者名・図面・社内の資料は、**使わないでください**。私が貼ってしまったときは、その場で注意して、ファイルやメモに残さないでください。
+- 画面や資料に出す名前は、すべて**ダミー**にしてください。会社名は「ひだまり工務店（サンプル）」、お客様は「サンプル様」にします。
+- 実在の会社の様式やロゴに、似せないでください。
+- 写真は、私が自分で撮った無関係なもの（自宅・公園など）か、絵だけを使ってください。
+- 画面の目立つところに「サンプルです（架空）」と書いてください。
+
+## 数字・制度・日付のお願い
+
+- 補助金・法律・金利などの数字は、**私が貼った公式ページの内容だけ**から作ってください。書いていないことは、書かずに「公式ページで確認」と出してください。
+- 数字を出すときは、**出典と、確認した日**を一緒に表示してください。変わる情報には「〇年〇月時点」と書いてください。
+- 計算は**2回確かめて**、式と結果を私に見せてください。
+- 「必ず安くなる」「必ず通る」など、**効果や結果を約束する文は書かないでください**。「概算」「目安」と書いてください。
+
+## 作るもののルール
+
+- 形は、特に指定がなければ **HTML1ファイル**（インターネットなしで動く）にしてください。
+- ファイル名は「日付_中身_版」にしてください。例:「2026-11-27_窓シミュレーター_v1.html」
+- 一度に全部を作らず、**小さく作って、動くのを私が確かめてから**次を足してください。
+- 入力欄には、0・空欄・マイナス・とても大きい数を入れても壊れないようにしてください。
+- 前回の入力が残る機能をつけるときは、起動したときに「前回の続き／新しく始める」を必ず聞いてください。
+
+## できあがりの確認の手順
+
+「できました」と言う前に、次を確かめて、結果を表で見せてください。
+
+1. ファイルが開けるか。画面が崩れていないか。
+2. 計算があるものは、サンプルの1か所を、ファイルの式を使わずに計算し直して、画面の値と比べる。
+3. ボタンや選択は、実際に押して確かめる。**押して確かめられなかったものは、そう書く。**
+4. 保存がない状態（初めて開く）と、保存がある状態（前回の続き）の、両方で、開いた直後の画面を見る。
+5. 本物の名前・会社名・連絡先が入っていないか。
+6. 私が自分の目で見るべきところを3つ挙げる。
+
+**「確認しました」と書くときは、何をどこで見たかを一緒に書いてください。確認できていないことは「未確認」と書いてください。**
+確かめられなかったことは、「確かめられなかった」とそのまま書いてください。「確認しました」だけの報告はしないでください。
+
+## 私のこと（書きかえてください）
+
+- 作る道具の使い手: 【例: 外回りの営業】
+- 使う端末: 【例: iPad（Safari）、事務所のWindowsパソコン】
+- 印刷: 【例: A4縦1枚におさめたい】
+</pre></details>
+<div class="btns"><button class="copy" type="button" data-target="tp1">全文をコピー</button>
+<a class="dl" href="files/道具づくり用_CLAUDE.md" download>ファイルをダウンロード</a></div>
+</article>
+</section>
+
+<section id="ck1">
+<h2>③ 「会社の情報を使わずに作る」チェックリスト</h2>
+<p>道具を作る前・作る途中・人に渡す前に、順に確かめます。チェックは、この画面では保存されません。印刷するか、ファイルをダウンロードして使ってください。</p>
+<h3 class="cg">作り始める前に</h3><ul class="chk"><li><label><input type="checkbox"> 自宅・私物のパソコンとアカウントで作っている（職場のパソコンや、職場のアカウントではない）。</label></li><li><label><input type="checkbox"> 勤務先に、AIの利用・副業・出版などについて決まりがないか、自分で確かめた。決まりがあれば、それに従う。</label></li><li><label><input type="checkbox"> 作る道具の目的を、「会社の資料がなくても作れるもの」に絞った。</label></li></ul>
+<h3 class="cg">AIに渡さないもの</h3><ul class="chk"><li><label><input type="checkbox"> お客様の名前・住所・電話番号・メールアドレス・家族構成など、個人が特定できる情報。</label></li><li><label><input type="checkbox"> お客様の図面、見積書、契約書、写真（家や表札が写るもの）。</label></li><li><label><input type="checkbox"> 社内の資料（価格表の原本、仕入れ値、社内マニュアル、様式の原本）。</label></li><li><label><input type="checkbox"> 会社のロゴ、商品名、商品のカタログ画像。</label></li><li><label><input type="checkbox"> パスワード、APIキー、アクセスのためのURL（合言葉の入ったもの）。</label></li></ul>
+<h3 class="cg">ダミーに置きかえるもの</h3><ul class="chk"><li><label><input type="checkbox"> 会社名 →「ひだまり工務店（サンプル）」のような、架空の名前。</label></li><li><label><input type="checkbox"> お客様名 →「サンプル様」。担当者名 → ありふれた下の名前だけ、または「担当 花子」。</label></li><li><label><input type="checkbox"> 住所・電話 → 書かない（「任意」の空欄にする）か、明らかな架空の表記にする。</label></li><li><label><input type="checkbox"> 金額・単価 → 手で計算しやすい、きりのいい数字。画面に「サンプル用の仮の単価」と書く。</label></li><li><label><input type="checkbox"> 間取り・図面 → ツールのテンプレート（2LDKなど）や、自分で描いた架空の図面。</label></li><li><label><input type="checkbox"> 写真 → 自分で撮った、無関係な写真（自宅・公園など）。人や表札を写さない。</label></li></ul>
+<h3 class="cg">途中で確かめること</h3><ul class="chk"><li><label><input type="checkbox"> AIに「どのファイルを読みましたか」と聞いて、手元の本物の資料を読んでいないか確かめる。</label></li><li><label><input type="checkbox"> 画面・印刷・ファイル名・ファイルの中の説明文に、本物の名前や会社名が残っていないか、検索で探す。</label></li><li><label><input type="checkbox"> ファイルのプロパティ（作成者名など）や、保存した履歴に、本名が残っていないか見る。</label></li><li><label><input type="checkbox"> 画面のスクリーンショットを撮ったら、拡大して、小さな文字（住所・ロゴ・URL）まで見る。</label></li></ul>
+<h3 class="cg">人に渡す・公開する前に</h3><ul class="chk"><li><label><input type="checkbox"> 公開するページ・ファイルを、初めて開く人の目で、最初から最後まで見る。</label></li><li><label><input type="checkbox"> 実在のメーカーのロゴ・URL・QRコードが、ページの下の方や、2ページ目以降に残っていない。</label></li><li><label><input type="checkbox"> 公開したあとで、公開先の履歴（過去の版）にも、名前などが残っていないか確かめる。</label></li><li><label><input type="checkbox"> 「補助金の数字」「法律の話」には、出典と確認日が付いていて、「最終判断は窓口・専門家で」と書いてある。</label></li></ul>
+<div class="btns"><a class="dl" href="files/会社の情報を使わずに作るチェックリスト.md" download>ダウンロード（テキスト）</a></div>
+</section>
+
+<section id="ck2">
+<h2>④ 完成の確認チェックリスト</h2>
+<p>「できました」と言う前に確かめることです。5つの区分のうち、1〜4が「確かめる」、5が「育てる」です。</p>
+<h3 class="cg">1. 自分で動かす（使う端末で、実際に押す）</h3><ul class="chk"><li><label><input type="checkbox"> 使う端末（iPad・スマホ・事務所のパソコン）で、実際にボタンを押した。パソコンで動いただけで終わりにしていない。</label></li><li><label><input type="checkbox"> 数の欄に、0・空欄・マイナス・とても大きい数を入れて、表示が壊れない。</label></li><li><label><input type="checkbox"> 印刷（またはPDF）をして、文字が切れたり、ページがずれたりしていない。</label></li><li><label><input type="checkbox"> 「保存がない状態（初めて開く）」の、開いた直後の画面を見た。</label></li><li><label><input type="checkbox"> 「保存がある状態（前回の続き）」の、開いた直後の画面を見た。別のお客様の入力が出ていない。</label></li></ul>
+<h3 class="cg">2. 数字を確かめる（式の外で）</h3><ul class="chk"><li><label><input type="checkbox"> 計算のある所を1か所、電卓で計算し直して、画面と合う。</label></li><li><label><input type="checkbox"> 公式の数字（補助額・期限・金利など）を、公式ページと1つずつ見比べた。</label></li><li><label><input type="checkbox"> 数字や制度に、出典と確認日が付いている。古くなる情報に「〇年〇月時点」と書いてある。</label></li><li><label><input type="checkbox"> 「概算です」「目安です」「最終判断は窓口・専門家で」の注意が、画面と印刷の両方にある。</label></li></ul>
+<h3 class="cg">3. 別の目で見てもらう</h3><ul class="chk"><li><label><input type="checkbox"> 作った会話とは別の新しい会話で、「ゼロから疑って、おかしい所を全部挙げて」と頼んだ。</label></li><li><label><input type="checkbox"> 重大・中・軽微に分けてもらい、重大から順に直した。</label></li><li><label><input type="checkbox"> できれば、人にも見てもらった（遠慮なく言ってくれる人）。</label></li><li><label><input type="checkbox"> AIの指摘が正しいかを、自分の目でも確かめた。</label></li></ul>
+<h3 class="cg">4. 「確認した」に、何を見たかを添える</h3><ul class="chk"><li><label><input type="checkbox"> AIの報告に「何をどこで見たか」が書いてある。書いていないものは、確認していないものとして扱った。</label></li><li><label><input type="checkbox"> 「未確認」と書かれたものは、確認する手段がないか考え、あれば自分で確かめた。</label></li><li><label><input type="checkbox"> 自分の報告にも、「見たもの」と「見られなかったもの」を分けて書いた。</label></li></ul>
+<h3 class="cg">5. 直して、記録して、育てる</h3><ul class="chk"><li><label><input type="checkbox"> 直したことを、1行ずつ記録した（例: 「○月○日、数の欄に0が入ると壊れた → 1以上だけ受け付けるように直した」）。</label></li><li><label><input type="checkbox"> 数で確かめられることは、検算テスト（回帰テスト）にして、直すたびに走らせている。</label></li><li><label><input type="checkbox"> 年度や制度が変わったときに差し替える所（表・期限・金額）を、メモしてある。</label></li><li><label><input type="checkbox"> 公開・配布するものは、ロゴやURLなど、会社のものが残っていないか、もう一度見た。</label></li></ul>
+<div class="btns"><a class="dl" href="files/完成の確認チェックリスト.md" download>ダウンロード（テキスト）</a></div>
+</section>
+
+<section id="ws">
+<h2>おまけ 書き込めるワークシート（PDF）</h2>
+<p>本の第8章「自分の道具を作る7ステップ」を、そのまま書き込める形にしたワークシートです（A4・2ページ）。印刷して、ペンで書き込みます。手で書くと、ステップ2の「手順」が意外と書けないことに気づきます。それが、最初の発見です。</p>
+<div class="btns"><a class="dl" href="files/自分の道具を作る7ステップ_ワークシート.pdf" download>書き込めるワークシート（PDF）をダウンロード</a></div>
+<div class="note">このワークシートを使っても、仕事の成果や収入が得られるとは限りません。お願い文などの本体は、上の①〜④にあります。</div>
+</section>
+
+</main>
+<footer><div class="wrap">
+<div class="std">公式LINEでできること: ① 特典の受け取り　② 本の使い方・誤記のご連絡（受付フォームをご案内します）。※ 個別のご相談（税金・法律・収益など）へのご返信は、おこなっておりません。</div>
+<p>この特典は2026年11月に作りました。Claude Codeの画面や動きは変わることがあります。AIが作ったものには、まちがいや、他人の権利にふれる内容が入ることがあります。使う前・渡す前に、ご自身で確かめてください。特典の配布方法は、予告なく変更・終了する場合があります。</p>
+<p>「Claude」「Claude Code」はAnthropic PBCの商標です。本書と本特典は非公式のものです。</p>
+<p>お願い文・ひな形・チェックリストは、本書のために自作したものです。</p>
+</div></footer>
+<script>
+(function(){
+  function flash(btn, ok){
+    var old = btn.dataset.label || btn.textContent;
+    btn.dataset.label = old;
+    btn.textContent = ok ? 'コピーしました' : 'コピーできませんでした（手でえらんでコピーしてください）';
+    btn.classList.toggle('done', ok);
+    setTimeout(function(){ btn.textContent = old; btn.classList.remove('done'); }, 2200);
+  }
+  function fallback(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.top='-1000px';
+    document.body.appendChild(ta); ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e) { ok = false; }
+    document.body.removeChild(ta); return ok;
+  }
+  document.querySelectorAll('button.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.dataset.target);
+      var text = el ? el.textContent : '';
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(function(){ flash(btn, true); }, function(){ flash(btn, fallback(text)); });
+      } else { flash(btn, fallback(text)); }
+    });
+  });
+  var fb = document.querySelectorAll('.filters button');
+  fb.forEach(function(b){
+    b.addEventListener('click', function(){
+      var f = b.dataset.filter;
+      fb.forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      document.querySelectorAll('#cards .card').forEach(function(c){
+        c.hidden = !(f === 'all' || c.dataset.scene === f);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
